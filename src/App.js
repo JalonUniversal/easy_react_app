@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
-import { Foo } from '@/components/hooks';
-import { enhance } from '@/utils/decoratars';
+import { AppInfo } from '@/components/hooks';
+import { enhance } from 'UTILS/decoratars';
+import { loadInfo } from 'SERVICE';
 import './style';
 
 @enhance
 class App extends Component {
   appName = 'Easy-React-App'
   componentDidMount() {
-    this.log(this.xhr);
+    // this.loadData();
+  }
+  loadData = async () => {
+    const res = await loadInfo();
+    this.log('res: ', res);
   }
   render() {
     return (
       <div>
-        { this.appName }
-        <Foo />
-        <img src={require('./assets/react.jpg')} width={200} height={200} />
+        <img src={require('./assets/react.jpg')} />
+        <AppInfo />
       </div>
     )
   }
