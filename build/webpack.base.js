@@ -94,6 +94,9 @@ module.exports = {
   resolve: {
     alias: {
       '@': path.resolve(__dirname, "../src"),
+      'CONFIG': path.resolve(__dirname, "../src/config"),
+      'SERVICE': path.resolve(__dirname, "../src/service"),
+      'UTILS': path.resolve(__dirname, "../src/utils")
     },
     extensions: ['.js', '.jsx', '.json', '.css', '.less']
   },
