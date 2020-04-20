@@ -21,6 +21,7 @@ module.exports = {
             '@babel/preset-react'
           ],
           plugins: [
+            ['import', { libraryName: 'antd', style: 'css' }],
             '@babel/plugin-transform-runtime',
             ["@babel/plugin-proposal-decorators", { "legacy": true }],
             '@babel/plugin-proposal-class-properties'
@@ -33,9 +34,11 @@ module.exports = {
           MiniCssExtractPlugin.loader, 
           {
             loader: 'css-loader',
-            options: {
-              modules: true
-            }
+            // options: {
+            //   modules: true
+            // } 
+            // 注意 antd 与 css-module 冲突
+            // antd 使用 css 方案
           }, 
           {
             loader: 'postcss-loader',
@@ -57,7 +60,7 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: true
-            }
+            } // 注意 antd 与 css-module 冲突
           }, 
           {
             loader: 'postcss-loader',
@@ -69,7 +72,10 @@ module.exports = {
               ]
             }
           },
-          'less-loader' 
+          {
+            loader: 'less-loader',
+            options: { javascriptEnabled: true }
+          }
         ]
       },
       {

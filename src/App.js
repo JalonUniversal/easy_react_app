@@ -4,6 +4,8 @@ import { enhance } from 'UTILS/decoratars';
 import { loadInfo } from 'SERVICE';
 import './style';
 
+import { Button } from 'antd';
+
 @enhance
 class App extends Component {
   appName = 'Easy-React-App'
@@ -19,6 +21,7 @@ class App extends Component {
       <div>
         <img src={require('./assets/react.jpg')} />
         <AppInfo />
+        <Button type='primary'>Easy-React-App</Button>
       </div>
     )
   }
