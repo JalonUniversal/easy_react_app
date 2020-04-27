@@ -1,7 +1,13 @@
 const path = require('path');
+const os = require('os');
+const threads = os.cpus().length;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HappyPack = require('happypack');
+// const happyThreadPool = HappyPack.ThreadPool({
+//   size: 2
+// });
 
 module.exports = {
   entry: "./src/index.js",
@@ -14,18 +20,8 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          presets: [
-            '@babel/preset-env',
-            '@babel/preset-react'
-          ],
-          plugins: [
-            '@babel/plugin-transform-runtime',
-            ["@babel/plugin-proposal-decorators", { "legacy": true }],
-            '@babel/plugin-proposal-class-properties'
-          ]
-        }
+        // loader: 'babel-loader',
+        loader: ["happypack/loader?id=babel"],
       },
       {
         test: /\.css$/,
@@ -101,6 +97,27 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json', '.css', '.less']
   },
   plugins: [
+    new HappyPack({
+      id: 'babel',
+      loaders: [
+        {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env',
+              '@babel/preset-react'
+            ],
+            plugins: [
+              '@babel/plugin-transform-runtime',
+              ["@babel/plugin-proposal-decorators", { "legacy": true }],
+              '@babel/plugin-proposal-class-properties'
+            ]
+          }
+        }
+      ],
+      threads: threads,
+      verbose: true
+    }),
     new ProgressBarPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html')
