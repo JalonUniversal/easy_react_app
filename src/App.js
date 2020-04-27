@@ -3,14 +3,10 @@ import { AppInfo } from '@/components/hooks';
 import { enhance } from 'UTILS/decoratars';
 import { loadInfo } from 'SERVICE';
 import './style';
-import Example from '@/test';
 
 @enhance
 class App extends Component {
   appName = 'Easy-React-App'
-  componentDidMount() {
-    // this.loadData();
-  }
   loadData = async () => {
     const res = await loadInfo();
     this.log('res: ', res);
@@ -20,8 +16,6 @@ class App extends Component {
       <div>
         <img src={require('./assets/react.jpg')} />
         <AppInfo />
-        <Example />
-        极速打包
       </div>
     )
   }

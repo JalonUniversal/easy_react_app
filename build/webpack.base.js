@@ -5,9 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HappyPack = require('happypack');
-// const happyThreadPool = HappyPack.ThreadPool({
-//   size: 2
-// });
 
 module.exports = {
   entry: "./src/index.js",
@@ -20,7 +17,6 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        // loader: 'babel-loader',
         loader: ["happypack/loader?id=babel"],
       },
       {
@@ -30,7 +26,7 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: true
+              modules: false
             }
           }, 
           {
@@ -116,7 +112,10 @@ module.exports = {
         }
       ],
       threads: threads,
-      verbose: true
+      threadPool: HappyPack.ThreadPool({
+        size: threads
+      }),
+      verbose: false
     }),
     new ProgressBarPlugin(),
     new HtmlWebpackPlugin({
