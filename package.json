@@ -5,9 +5,9 @@
   "author": "Jalon Lee",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev webpack-dev-server --config ./build/webpack.dev.js",
-    "build": "cross-env NODE_ENV=prod rm -rf ./dist && webpack --config ./build/webpack.dev.js",
-    "build:prod": "rm -rf ./dist && webpack --config ./build/webpack.prod.js",
+    "start": "cross-env NODE_ENV=dev webpack-dev-server --config ./build/webpack.dev.js",
+    "build: dev": "cross-env NODE_ENV=prod rm -rf ./dist && webpack --config ./build/webpack.dev.js",
+    "build": "rm -rf ./dist && webpack --config ./build/webpack.prod.js",
     "analyz": "set NODE_ENV=production npm_config_report=true && npm run build:prod"
   },
   "devDependencies": {
